@@ -1,0 +1,27 @@
+{
+  "name": "minip",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/loupde/minip.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/loupde/minip/issues"
+  },
+  "homepage": "https://github.com/loupde/minip#readme",
+  "dependencies": {
+    "uview-ui": "^2.0.37"
+  },
+  "devDependencies": {
+    "sass": "^1.75.0",
+    "sass-loader": "^10.5.2"
+  }
+}
