@@ -1,13 +1,5 @@
 <template>
 	<view>
-		<u-navbar fixed placeholder :border-bottom="false" title="home">
-			<view slot="left"></view>
-		</u-navbar>
-		1111
-		<view>
-			123
-			<image style="width: 20rpx;" src="../../static/home.svg"></image>
-		</view>
 		<u-tabbar :list="tabbar" ></u-tabbar>
 	</view>
 </template>
@@ -38,7 +30,3 @@
 		}
 	};
 </script>
-
-<style lang="scss">
-	
-</style>

@@ -1,11 +1,19 @@
-{	"easycom": {
-		"^u-(.*)": "uview-ui/components/u-$1/u-$1.vue"
+{
+	"easycom": {
+		"^u-(.*)": "@/uni_modules/uview-ui/components/u-$1/u-$1.vue"
 	},
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "uni-app"
+				"navigationBarTitleText": "",
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/mine/mine",
+			"style": {
+				"navigationBarTitleText": "我的"
 			}
 		}
 	],
@@ -15,5 +23,23 @@
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8"
 	},
-	"uniIdRouter": {}
+	"tabBar": {
+		"color": "#909399",
+		"selectedColor": "#303133",
+		"backgroundColor": "#FFFFFF",
+		"borderStyle": "black",
+		"list": [{
+				"pagePath": "pages/index/index",
+				"iconPath": "static/tab_1.png",
+				"selectedIconPath": "static/tab_01.png",
+				"text": "首页1"
+			},
+			{
+				"pagePath": "pages/mine/mine",
+				"iconPath": "static/tab_3.png",
+				"selectedIconPath": "static/tab_03.png",
+				"text": "我的"
+			}
+		]
+	}
 }
