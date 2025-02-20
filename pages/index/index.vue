@@ -6,9 +6,9 @@
 		1111
 		<view>
 			123
-			<image style="width: 20rpx;" src="../../static/home.svg"></image>
+			<!-- <image style="width: 20rpx;" src="../../static/home.svg"></image> -->
 		</view>
-		<u-tabbar :list="tabbar" ></u-tabbar>
+		<u-tabbar :list="tabbar"></u-tabbar>
 	</view>
 </template>
 
@@ -40,5 +40,5 @@
 </script>
 
 <style lang="scss">
-	
+
 </style>
