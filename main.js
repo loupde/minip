@@ -2,9 +2,7 @@ import App from './App'
 
 // #ifndef VUE3
 import Vue from 'vue'
-// uview
-import uView from "uview-ui";
-Vue.use(uView)
+
 // vuex
 import store from './store/index.js'
 Vue.prototype.$store = store
