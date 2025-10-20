@@ -1,6 +1,31 @@
 const ble = {
 	init: function(key) {
 		return new Promise((resolve, reject) => {
+			uni.getBluetoothAdapterState({ //检测蓝牙是否打开 //获取本机蓝牙适配器状态
+				//蓝牙的匹配状态
+				success: (res) => {
+					console.log(
+						'本机设备的蓝牙已打开'
+					)
+					resolve(res)
+				},
+				fail(error) {
+					uni.openBluetoothAdapter({
+						success(res) {
+							console.log('初始化蓝牙成功', res)
+							resolve(res)
+						},
+						fail(err) {
+							console.log('初始化蓝牙失败')
+							reject("请打开蓝牙")
+						}
+					})
+					// reject(
+					// 	"查看手机蓝牙(安卓蓝牙定位)是否打开"
+					// )
+				},
+			});
+			return
 			uni.openBluetoothAdapter({
 				success(res) {
 					//console.log('初始化蓝牙成功',res)

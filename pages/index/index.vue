@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<uni-section title="设备控制" type="line" padding>
-			<uni-grid :column="3" :square="false" :highlight="false" @change="change">
+			<uni-grid :column="3" :square="false" :highlight="false" @change="itemClick">
 				<uni-grid-item v-for="(item, index) in list" :index="index" :key="index">
 					<view class="grid-item-box">
 						<text class="text">{{ item.text }}</text>
@@ -9,7 +9,7 @@
 				</uni-grid-item>
 			</uni-grid>
 		</uni-section>
-		<uni-section title="设备控制" type="line" padding>
+		<!-- <uni-section title="设备控制" type="line" padding>
 			<uni-grid :column="3" :square="false" :highlight="false" @change="change">
 				<uni-grid-item v-for="(item, index) in list" :index="index" :key="index">
 					<view class="grid-item-box">
@@ -17,7 +17,7 @@
 					</view>
 				</uni-grid-item>
 			</uni-grid>
-		</uni-section>
+		</uni-section> -->
 	</view>
 </template>
 
@@ -83,8 +83,11 @@
 			handleClose() {
 				this.show = false
 			},
-			click1(e) {
+			itemClick(e) {
 				console.log('click1', e);
+				uni.navigateTo({
+					url: '/pages/bleList/bleList'
+				})
 			},
 			change1(e) {
 				console.log('change1', e);
