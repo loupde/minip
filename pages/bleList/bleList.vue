@@ -108,6 +108,34 @@
 			padNumber(num) {
 				return num < 10 ? '0' + num : num;
 			},
+			sendMessage(){
+				 //要发送的字符串（要在起始位置添加起始字符，结束位置添加结束字符）
+				    let order = that.stringToBytes(recs);
+				    let byteLen = order.byteLength;//长度
+				    let pos = 0;       //字符位置
+				    let tempBuffer;   //一次发送的数据
+				    var i = 0;          //计数
+				
+				//为了安全每次发送18个字节 (每次最多20个)
+				//发送之前
+				    while (byteLen > 0) {
+				      i++;
+				      if (byteLen > 18) {
+				        tempBuffer = order.slice(pos, pos + 18);
+				        pos += 18;
+				        byteLen -= 18;
+				        console.log("第", i, "次发送:", tempBuffer);
+				        that.writeBLECharacteristicValue(tempBuffer);
+				      } else {
+				        tempBuffer = order.slice(pos, pos + byteLen);
+				        pos += byteLen;
+				        byteLen -= byteLen;
+				        console.log("第", i, "次发送:", tempBuffer);
+				        that.writeBLECharacteristicValue(tempBuffer);
+				      }
+				    }
+				    console.log("发送结束");
+			},
 			sendMsg() {
 				// const msg = this.msg;
 				// this.updateHeartBeat()
@@ -115,25 +143,25 @@
 
 				// log.writeLog(`send -->:${msg}`)
 				console.log('debugMsg', this.debugMsg)
-				const len = this.debugMsg.length
-				const arr = []
-				let index = 2
-				let lastIndex = 0
-				do {
-					const count = Math.ceil(len / 2)
-					arr.push(this.debugMsg.substr(lastIndex, 2))
-					lastIndex = index
-					index += 2
-				} while (arr.length < Math.ceil(len / 2))
+				// const len = this.debugMsg.length
+				// const arr = []
+				// let index = 2
+				// let lastIndex = 0
+				// do {
+				// 	const count = Math.ceil(len / 2)
+				// 	arr.push(this.debugMsg.substr(lastIndex, 2))
+				// 	lastIndex = index
+				// 	index += 2
+				// } while (arr.length < Math.ceil(len / 2))
 				//console.log('arr', arr)
 
-				const buffer = new ArrayBuffer(arr.length)
-				const dataView = new DataView(buffer)
-				for (let i = 0; i < arr.length; i++) {
-					dataView.setUint8(i, `0x${arr[i]}`)
-				}
+				// const buffer = new ArrayBuffer(arr.length)
+				// const dataView = new DataView(buffer)
+				// for (let i = 0; i < arr.length; i++) {
+				// 	dataView.setUint8(i, `0x${arr[i]}`)
+				// }
 				const _this = this
-				console.log('buffer', this.bufferToHex(buffer))
+				// console.log('buffer', this.bufferToHex(buffer))
 				//console.log('deviceId', _this.deviceId)
 				//console.log('serviceId', _this.serviceId)
 				//console.log('writeId', _this.writeId)
@@ -141,7 +169,7 @@
 					deviceId: _this.deviceId,
 					serviceId: _this.serviceId,
 					characteristicId: _this.writeId,
-					value: buffer, //自定义内容buffer
+					value: tool.str2ab(_this.debugMsg), //自定义内容buffer
 					success(res) {
 						console.log('写入成功', res)
 					},
@@ -564,9 +592,11 @@
 					// 结果里有个value值，该值为 ArrayBuffer 类型
 					console.log('返回原始数据', res.value)
 					let resHex = that.ab2hex(res.value)
+					const str = tool.hexCharCodeToStr(resHex);
 					that.contentList.push(`${that.getCurrentTime()} rec:${resHex}`)
 					// log.writeLog(`rec -->:${resHex}`)
 					console.log('16进制', resHex)
+					console.log('rec str', str)
 					// if (resHex.length === 50) { //vin
 					// 	// 最后将16进制转换为ascii码，就能看到对应的结果 字母 数字
 					// 	const resultHex = resHex.substring(14, resHex.length - 2)
@@ -605,6 +635,7 @@
 				return hexArr.join('');
 				console.log(hexArr)
 			},
+			
 			//字符串转ArrayBuff
 			strToArrayBuffer(str) {
 				// 首先将字符串转为16进制

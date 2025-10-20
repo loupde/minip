@@ -48,7 +48,7 @@ export default {
 		for (var i = 0, strLen = str.length; i < strLen; i++) {
 			bufView[i] = str.charCodeAt(i);
 		}
-		return bufView;
+		return bufView.buffer;
 	},
 
 	// 向低功耗蓝牙设备特征值中写入二进制数据。

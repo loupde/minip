@@ -3,3 +3,4 @@ node_modules
 uni_modules
 unpackage
 package-lock.json
+.DS_Store
