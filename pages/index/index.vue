@@ -80,6 +80,20 @@
 			}
 		},
 		methods: {
+			login() {
+				uni.login({
+					provider: 'weixin',
+					success: async (loginRes) => {
+						const res = await loginByCode({
+							code: loginRes.code,
+							channel: "wechat"
+						})
+					},
+					fail: (info) => {
+						reject(`登录异常${info}`)
+					}
+				})
+			},
 			handleClose() {
 				this.show = false
 			},
