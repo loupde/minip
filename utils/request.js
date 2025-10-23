@@ -8,9 +8,9 @@ import {
 	showConfirm,
 	tansParams
 } from '@/utils/common'
-import log from '@/utils/log'
+// import log from '@/utils/log'
 let timeout = 10000
-const baseUrl = 'http://117.50.172.58:9010'
+const baseUrl = 'http://10.235.18.53:8080'
 
 const request = config => {
 	// 是否需要设置 token
@@ -19,17 +19,16 @@ const request = config => {
 	if (getToken() && !isToken) {
 		config.header['Authorization'] = getToken() // 'Bearer ' + 
 	}
-	config.header['X-Requested-With'] = 'XMLHttpRequest'
 	// get请求映射params参数
 	if (config.params) {
 		let url = config.url + '?' + tansParams(config.params)
 		url = url.slice(0, -1)
 		config.url = url
 	}
-	log.writeLog(`${config.method} url:${config.url}`)
+	// log.writeLog(`${config.method} url:${config.url}`)
 	if (config.data) {
-		log.writeLog(`data:${JSON.stringify(config.data)}`)
-		console.log('body ===>',config.data)
+		// log.writeLog(`data:${JSON.stringify(config.data)}`)
+		console.log('body ===>', config.data)
 	}
 	return new Promise((resolve, reject) => {
 		uni.request({
@@ -45,7 +44,7 @@ const request = config => {
 					errMsg,
 					data
 				} = response
-				log.writeLog("res:", JSON.stringify(response))
+				// log.writeLog("res:", JSON.stringify(response))
 				console.log('res', response)
 				// if (error) {
 				// 	toast('后端接口连接异常')
@@ -80,9 +79,9 @@ const request = config => {
 					});
 					reject(code)
 				}
-				if(data.success){
+				if (data.data) {
 					resolve(data.data)
-				}else{
+				} else {
 					uni.showModal({
 						title: '提示',
 						content: data.message,

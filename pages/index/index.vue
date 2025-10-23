@@ -1,13 +1,13 @@
 <template>
 	<view>
 		<uni-section title="设备控制" type="line" padding>
-			<uni-grid :column="3" :square="false" :highlight="false" @change="itemClick">
+			<!-- <uni-grid :column="3" :square="false" :highlight="false" @change="itemClick">
 				<uni-grid-item v-for="(item, index) in list" :index="index" :key="index">
 					<view class="grid-item-box">
 						<text class="text">{{ item.text }}</text>
 					</view>
 				</uni-grid-item>
-			</uni-grid>
+			</uni-grid> -->
 		</uni-section>
 		<!-- <uni-section title="设备控制" type="line" padding>
 			<uni-grid :column="3" :square="false" :highlight="false" @change="change">
@@ -22,6 +22,13 @@
 </template>
 
 <script>
+	import {
+		login,
+		getInfo
+	} from '@/api/login'
+	import {
+		setToken
+	} from '@/utils/auth'
 	export default {
 		data() {
 			return {
@@ -79,15 +86,21 @@
 				return this.$store.state.tabbar;
 			}
 		},
+		mounted() {
+			this.getInfo()
+			this.login()
+		},
 		methods: {
+			async getInfo() {
+				const res = await getInfo()
+				console.log("info", res)
+			},
 			login() {
 				uni.login({
 					provider: 'weixin',
 					success: async (loginRes) => {
-						const res = await loginByCode({
-							code: loginRes.code,
-							channel: "wechat"
-						})
+						const res = await login(loginRes.code)
+						setToken(res.access_token)
 					},
 					fail: (info) => {
 						reject(`登录异常${info}`)
