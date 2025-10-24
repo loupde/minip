@@ -1,8 +1,5 @@
 <template>
 	<view>
-		<!-- <u-navbar fixed placeholder :border-bottom="false" title="个人中心">
-			<view slot="left"></view>
-		</u-navbar> -->
 
 	</view>
 </template>

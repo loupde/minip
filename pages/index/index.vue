@@ -1,14 +1,12 @@
 <template>
-	<view>
-		<uni-section title="设备控制" type="line" padding>
-			<!-- <uni-grid :column="3" :square="false" :highlight="false" @change="itemClick">
-				<uni-grid-item v-for="(item, index) in list" :index="index" :key="index">
-					<view class="grid-item-box">
-						<text class="text">{{ item.text }}</text>
-					</view>
-				</uni-grid-item>
-			</uni-grid> -->
-		</uni-section>
+	<view class="home-page">
+		<uni-grid :column="3" :square="false" :highlight="false" @change="itemClick">
+			<uni-grid-item v-for="(item, index) in list" :index="index" :key="index">
+				<view class="grid-item-box">
+					<text class="text">{{ item.text }}</text>
+				</view>
+			</uni-grid-item>
+		</uni-grid>
 		<!-- <uni-section title="设备控制" type="line" padding>
 			<uni-grid :column="3" :square="false" :highlight="false" @change="change">
 				<uni-grid-item v-for="(item, index) in list" :index="index" :key="index">
@@ -124,6 +122,10 @@
 </script>
 
 <style lang="scss">
+	.home-page {
+		padding: 15rpx;
+	}
+
 	.grid-item-box {
 		flex: 1;
 		display: flex;
